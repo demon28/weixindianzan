@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>微信点赞</title>
+</head>
+<body>
+
+    <div style="margin-top:50px"></div>
+    <label>点赞次数：</label>
+    <input  id="count" type="text" value="10" />
+    <input type="button" value="开始" onclick="save()" />
+    <br/>
+    <br/>
+    <br/>
+    <center>
+    <input type="button" value="停止" onclick="stop()"  />
+    </center>
+</body>
+
+    <!-- body 最后 -->
+    <script src="htmljs/jquery.min.js"></script>
+    <script src="htmljs/jquery-weui.min.js"></script>
+
+    <!-- 如果使用了某些拓展插件还需要额外的JS -->
+    <script src="htmljs/swiper.min.js"></script>
+    <script src="htmljs/city-picker.min.js"></script>
+
+    <script>
+
+
+    $(function () {
+
+      var count = window.ec.getConfig("count");
+      $("#count").val(count);
+      var empty=  $("#count").val();
+      if(empty==""){ $("#count").val("10");}
+
+     });
+
+
+    function save() {
+
+      var count= $("#count").val();
+      if(count==""){
+         count="10";
+      }
+
+       window.ec.saveConfig("count", count);
+
+        if(window.ec.isAccMode()){
+          window.ec.toast("点赞次数："+count);
+          window.ec.start()
+        }else{
+         alert("请在“其他”中设置“无障碍”模式")
+        }
+
+
+     }
+
+  function stop(){
+        window.ec.stopTask() ;
+  }
+
+    </script>
+</html>
